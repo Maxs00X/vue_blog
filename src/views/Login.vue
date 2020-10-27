@@ -6,19 +6,30 @@
         <img src="../assets/logo1.jpg" alt="" />
         <br />
         <br />
-        <el-form label-width="0px" class="login-form">
-          <el-form-item>
+        <el-form
+          label-width="0px"
+          class="login-form"
+          :model="loginForm"
+          :rules="rules"
+        >
+          <el-form-item prop="uname">
             <el-input
               placeholder="账号"
               prefix-icon="el-icon-user-solid"
+              v-model="loginForm.uname"
             ></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-input placeholder="密码" prefix-icon="el-icon-key"></el-input>
+          <el-form-item prop="pwd">
+            <el-input
+              placeholder="密码"
+              prefix-icon="el-icon-key"
+              v-model="loginForm.pwd"
+              type="password"
+            ></el-input>
           </el-form-item>
           <el-from-item class="btns">
             <el-button type="primary">登录</el-button>
-            <el-button type="success">注册</el-button>
+            <el-button type="success" class="sign-up">注册</el-button>
           </el-from-item>
         </el-form>
       </div>
@@ -32,8 +43,20 @@ export default {
   data() {
     return {
       circleUrl: "/assets/logo.png",
+      loginForm: {
+        uname: "admin",
+        pwd: "123456",
+      },
+      rules: {
+        uname: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+        pwd: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      },
+      methods:{
+
+      }
     };
   },
+  methods: {},
 };
 </script>
 
@@ -67,10 +90,10 @@ export default {
     border-radius: 50%;
   }
 }
-.login-form{
-
+.login-form {
+  padding: 0;
 }
-.btns{
-    
+.btns > .sign-up {
+  float: right;
 }
 </style>
