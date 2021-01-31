@@ -41,7 +41,7 @@
             class="login"
             @click="$refs.drawer.closeDrawer()"
             :loading="loading"
-            >{{ loading ? "提交中 ..." : "登 录" }}</el-button
+            >{{ loading ? "登录中 ..." : "登 录" }}</el-button
           >
         </div>
       </div>
