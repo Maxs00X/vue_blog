@@ -49,7 +49,7 @@
 
     <!-- main // 页面主内容 -->
     <div>
-      <div v-for="item in list" :key="item.cid" class="content">{{item.cid}} + {{item.author}} + {{item.title}} + {{item.gtm_create}}</div>
+      <div v-for="item in list" :key="item.cid" class="content">{{item.cid}} + {{item.author}} + <router-link :to="{name: 'content', params: {cid: item.cid } }">{{item.title}}</router-link> + {{item.gtm_create}}</div>
     </div>
   </div>
 </template>
