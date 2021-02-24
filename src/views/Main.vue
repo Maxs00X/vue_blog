@@ -48,7 +48,9 @@
     </el-drawer>
 
     <!-- main // 页面主内容 -->
-    
+    <div>
+      <div v-for="item in list" :key="item.cid" class="content">{{item.cid}} + {{item.author}} + {{item.title}} + {{item.gtm_create}}</div>
+    </div>
   </div>
 </template>
 
@@ -59,9 +61,10 @@ export default {
       dialog: false,
       loading: false,
       form: {
-        username: "",
-        password: "",
+        username: "Maxs Fang",
+        password: "123456",
       },
+      list: [],
       formLabelWidth: '70px',
       timer: null,
       rules: {
@@ -69,6 +72,9 @@ export default {
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
     };
+  },
+  created() {
+    this.getContentList()
   },
   methods: {
     handleClose(done) {
@@ -92,7 +98,14 @@ export default {
       this.loading = false;
       this.dialog = false;
       clearTimeout(this.timer);
+    },
+    async getContentList() {
+     const {data: res} = await this.$axios.get('/content/getlist')
+     if(res.code == 200){
+       this.list = res.data
+     }
     }
+    
   }
 }
 </script>
@@ -106,5 +119,10 @@ export default {
 
 .login_box_footer > .login {
     float: right;
+}
+
+.content {
+  position: relative;
+  transform: translate(50%, 50%);
 }
 </style>
